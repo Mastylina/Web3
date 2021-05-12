@@ -27,7 +27,6 @@
     </table>
 
     <a href="{{ path('product_index') }}" class="btn btn-outline-primary mx-2" >Back</a>
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
     
     <h1>Отзывы</h1>
 
@@ -44,7 +43,29 @@
     {% if app.user %}
         <h2>Напишите отзыв</h1>
         {{ form_start(commentForm) }}
-
+            <div class="row ml-2 mb-2">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="1">
+                            <label class="custom-control-label text-light" for="customRadioInline1">1</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="2">
+                            <label class="custom-control-label text-light" for="customRadioInline2">2</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" value="3">
+                            <label class="custom-control-label text-light" for="customRadioInline3">3</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input" value="4">
+                            <label class="custom-control-label text-light" for="customRadioInline4">4</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input" value="5">
+                            <label class="custom-control-label text-light" for="customRadioInline5">5</label>
+                        </div>
+                        {{ form_widget(commentForm.rating, { 'attr': {'class': 'hidden_estimate'} }) }}
+                    </div>
         {{ form_end(commentForm) }}
     {% endif %}
 {% endblock %}

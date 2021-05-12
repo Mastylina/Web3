@@ -12,15 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
-#[Route('/product')]
+#[Route('/')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository): Response
+    public function index(ProductRepository $productRepository,Request $request): Response
     {
+      
         return $this->render('product/index.html.twig', [
             'products' => $productRepository->findAll(),
+          
         ]);
     }
 
@@ -30,8 +33,10 @@ class ProductController extends AbstractController
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $product->setDateAddProductValue();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();
@@ -62,12 +67,12 @@ class ProductController extends AbstractController
         }
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'review' => $review,
+            'reviews' => $product->getReviews(),
             'commentForm' => $form->createView(),
-            'reviews' => $reviewRepository->findAll(),
         ]);
     }
 
+   
     #[Route('/{id}/edit', name: 'product_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Product $product): Response
     {

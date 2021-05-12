@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\Length;
 
 class ReviewFormType extends AbstractType
@@ -26,6 +27,7 @@ class ReviewFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('rating', TextType::class)
             ->add('save', SubmitType::class, [
                 'label' => 'Send',
                 'attr' => ['class' => 'btn btn-primary w-100 mt-2'],

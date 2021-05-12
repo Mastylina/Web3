@@ -17,7 +17,7 @@
        <div class="container"
             <header >
                 {% if app.user %}
-                   Приветствую Вас, {{ app.user.name }} <a href="{{ path('app_logout') }}" class="btn btn-outline-primary mx-2" >Logout</a>
+                   Hello, {{ app.user.name }} <a href="{{ path('app_logout') }}" class="btn btn-outline-primary mx-2" >Logout</a>
                 {% else %}
                     <a class="btn btn-outline-primary me-2" href="/login">Login</a>
                     <a class="btn btn-primary" href="/register">Sign-up</a>

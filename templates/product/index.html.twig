@@ -20,7 +20,7 @@
                 <td>{{ product.dateAddProduct ? product.dateAddProduct|date('Y-m-d H:i:s') : '' }}</td>
                 <td><a href="{{ path('product_show', {'id': product.id}) }}">{{ product.nameProduct }}</a></td>
                 <td>{{ product.reviews|length }}</td>
-                <td>{{ product.reviews|length}}</td>
+                <td>{{product.getAverageValue}}</td>
             </tr>
         {% else %}
             <tr>

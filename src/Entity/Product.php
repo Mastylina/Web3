@@ -39,6 +39,8 @@ class Product
      * @ORM\OneToMany(targetEntity=Review::class, mappedBy="product_",orphanRemoval=true, cascade={"persist"})
      */
     private $reviews;
+   
+    private $avarageEstimate;
 
     public function __construct()
     {
@@ -51,9 +53,27 @@ class Product
         return $this->id;
     }
 
+    public function getAverageValue()
+    {
+        $divisor=0;
+        $reviews=$this->getReviews();
+        $average_count = 0;
+        foreach ($reviews as $review)
+        {
+            $average_count += $review->getRating();
+            $divisor++;
+        }
+        $average_count = $average_count / $divisor;
+        return ($average_count);
+    }
     public function getDateAddProduct(): ?\DateTimeInterface
     {
         return $this->date_add_product;
+    }
+
+    public function setDateAddProductValue()
+    {
+        $this->date_add_product=new \DateTime();
     }
 
     public function setDateAddProduct(\DateTimeInterface $date_add_product): self
@@ -115,5 +135,13 @@ class Product
         }
 
         return $this;
+    }
+    public function getAvarageEstimate()
+    {
+        return $this->avarageEstimate;
+    }
+    public function setAvarageEstimate($avarageEstimate): void
+    {
+        $this->avarageEstimate = $avarageEstimate;
     }
 }
