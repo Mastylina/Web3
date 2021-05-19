@@ -63,7 +63,11 @@ class Product
             $average_count += $review->getRating();
             $divisor++;
         }
+        if ($divisor==0)
+        $average_count=0;
+        else {
         $average_count = $average_count / $divisor;
+        }
         return ($average_count);
     }
     public function getDateAddProduct(): ?\DateTimeInterface

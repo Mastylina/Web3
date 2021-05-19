@@ -14,7 +14,5 @@ class ProductCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Product::class;
-    }
-
-        
+    }     
 }

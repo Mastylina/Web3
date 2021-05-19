@@ -9,7 +9,7 @@ use App\Repository\ProductRepository;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'home')]
+    #[Route('/', name: 'home')]
     public function index(ProductRepository $product): Response
     {
         return $this->render('product/index.html.twig', [

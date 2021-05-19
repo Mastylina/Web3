@@ -3,14 +3,10 @@
 {% block title %}Product{% endblock %}
 
 {% block body %}
+ <div class="container">
     <h1>Product</h1>
-
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
             <tr>
                 <th>Date_add_product</th>
                 <td>{{ product.dateAddProduct ? product.dateAddProduct|date('Y-m-d H:i:s') : '' }}</td>
@@ -27,45 +23,28 @@
     </table>
 
     <a href="{{ path('product_index') }}" class="btn btn-outline-primary mx-2" >Back</a>
-    
-    <h1>Отзывы</h1>
-
-    {% for review in reviews %}
-        <div class="media background_color_white mb-2">
-            <div class="media-body">
-                <h5> {{review.user.name}} </h5>
-                <p> {{review.textReview}} </p>
-                <p> {{review.dateAdd ? review.dateAdd|date('Y-m-d H:i:s') : ''}} </p>
-            </div>
-        </div> 
-    {% endfor %}
-
     {% if app.user %}
         <h2>Напишите отзыв</h1>
         {{ form_start(commentForm) }}
-            <div class="row ml-2 mb-2">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input" value="1">
-                            <label class="custom-control-label text-light" for="customRadioInline1">1</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input" value="2">
-                            <label class="custom-control-label text-light" for="customRadioInline2">2</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input" value="3">
-                            <label class="custom-control-label text-light" for="customRadioInline3">3</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input" value="4">
-                            <label class="custom-control-label text-light" for="customRadioInline4">4</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input" value="5">
-                            <label class="custom-control-label text-light" for="customRadioInline5">5</label>
-                        </div>
-                        {{ form_widget(commentForm.rating, { 'attr': {'class': 'hidden_estimate'} }) }}
-                    </div>
         {{ form_end(commentForm) }}
     {% endif %}
+    <h1>Отзывы</h1>
+    <div class="form-group">
+    {% for review in reviews %}
+            <div class=" border-bottom border-primary">
+                <h5 class=""> {{review.user.name}} </h5>
+                    <div class="row">
+                        <div class="col">
+                            <p style="color:#6610f2;"> {{review.textReview}} </p>
+                            <p>Оценка: {{review.rating}} </p>
+                        </div>
+                        <div class="col-6">
+                            <p> {{review.dateAdd ? review.dateAdd|date('Y-m-d H:i:s') : ''}} </p>
+                        </div>
+                     </div>
+                
+            </div>
+    {% endfor %}
+    </div>
+</div>
 {% endblock %}
